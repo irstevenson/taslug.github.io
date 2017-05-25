@@ -12,7 +12,7 @@ First, ensure you have a version of Ruby >= 2.1.0 - if you have RVM installed, t
 directory it will attempt to set the Ruby version to that specified in `Gemfile`. After which
 execute:
 
-    $ sudo gem install bundler
+    $ gem install bundler
 
 Next, after cloning the repository go into the working folder and:
 
