@@ -1,0 +1,79 @@
+---
+layout: post
+status: publish
+published: true
+title: Hobart August Meeting - Keysigning and Tails
+author:
+  display_name: Scott Bragg
+  login: Faulteh
+  email: faulteh@scriptforge.org
+  url: http://www.scriptforge.org/
+author_login: Faulteh
+author_email: faulteh@scriptforge.org
+author_url: http://www.scriptforge.org/
+wordpress_id: 20
+wordpress_url: http://taslug.scriptforge.org/?p=20
+date: '2014-08-14 14:28:51 +1000'
+date_gmt: '2014-08-14 04:28:51 +1000'
+categories:
+- TasLUG South
+tags: []
+comments: []
+---
+<p>Hey LUGgers. This month has been a little crazy trying to fit in work, uni and PyConAU, leaving little time to organise for this month. Fortunately our good friend Karl has suggested that we hold a GnuPG keysigning event. So dust off that USB stick with your keyring, print out copies of the fingerprint to share with everyone.</p>
+<p>A quick and dirty intro to GnuPG and key signing follows this annoucement (PG DOWN!)</p>
+<p><strong>When<&#47;strong>: Thursday 21st August 2014 from 6pm.<br />
+<strong>Where<&#47;strong>: Hotel SOHO, 124 Davey St, Hobart<br />
+(we'll probably be in the downstairs function room, keep an eye out for the signs).</p>
+<h2><strong>Tentative Agenda<&#47;strong><&#47;h2><br />
+6pm - Arrive, mingle, setup, chat<br />
+<span style="line-height: 1.5;">6.30pm - News, announcements and discussion (SFD, crypto! duh...)<br />
+<&#47;span><span style="line-height: 1.5;">7pm - Let the signing begin!<br />
+<&#47;span><span style="line-height: 1.5;">7.30pm - Tails demo<&#47;span></p>
+<h2><em><strong>Coming up soon:<&#47;strong><&#47;em><&#47;h2><br />
+30th August - Launceston Meeting<br />
+20th September - SOFTWARE FREEDOM DAY!</p>
+<h1><span style="color: #000000;"><strong>Installing GNUPG<&#47;strong> <&#47;span><&#47;h1></p>
+<h2><span style="color: #000000;">How to get GPG:<&#47;span><&#47;h2></p>
+<ul>
+<li>From upstream:<a href="https:&#47;&#47;www.gnupg.org&#47;download&#47;">https:&#47;&#47;www.gnupg.org&#47;download&#47;<&#47;a><&#47;li>
+<li>For Mac OS X:<a href="https:&#47;&#47;gpgtools.org&#47;">https:&#47;&#47;gpgtools.org&#47;<&#47;a><&#47;li>
+<li>For Windows: <a href="http:&#47;&#47;gpg4win.org&#47;">http:&#47;&#47;gpg4win.org&#47;<&#47;a><&#47;li>
+<li>Various applications (eg Thunderbird, Evolution) have plugins to add gpg support.<&#47;li><br />
+<&#47;ul></p>
+<h2>What is a Keysigning Party?<&#47;h2><br />
+A key signing party is a get-together of people who use the PGP encryption system with the purpose of allowing those people to sign each others keys. Key signing parties serve to extend the web of trust to a great degree.</p>
+<p>Key signing parties also serve as great opportunities to discuss the political and social issues surrounding strong cryptography, individual liberties, individual sovereignty, and even implementing encryption technologies or perhaps future work on free encryption software.</p>
+<h2>What is Keysigning?<&#47;h2><br />
+Key signing is act of digitally signing a public key packet and a user id packet that is attached to the key in that public key packet. Key signing is done to verify that a given user id and public key really do belong to the entity that appears to own the key.</p>
+<p>In more basic terms it is done to verify that the representation of identity in the user id packet is valid. Usually, this means that the name on the PGP key matches the name on the identification the person is presenting to you when asking that you sign their key. In a sense, key signatures validate public keys. They are an endorsement of validity of a public key packet and associated id by a third party. This is the way in which key signing builds the web of trust.</p>
+<h2>What is the Web of Trust?<&#47;h2><br />
+"Web of trust" is a term used to describe the trust relationships between a group of keys. A key signature is a link, or strand if you will, in the web of trust. These links are called "Trust Paths". Trust paths can be bi-directional or only one way.</p>
+<p>The ideal web of trust is one in which everyone is connected bi-directionally to everyone else. In effect, everyone trusts that every key does in fact belong to its owner. The web of trust can be thought of as the sum of all the trust paths, or links, between all key holding parties. As a visual example, here is a graph of a web of trust that I belong to.</p>
+<h2>Generating Your Key Pair<&#47;h2><br />
+The process of generating a key pair is rather simple. Basically, you just need to run:</p>
+<pre>gpg --gen-key<&#47;pre><br />
+[Recommended settings are Default key type, Key size of 4096 bits and Expiry of 4-5 years]</p>
+<h2>Generating a Revocation Certificate<&#47;h2><br />
+This following additional step is optional, but recommended. A revocation certificate is a special from of digital signature on a public key that can be used to revoke that key in the event that you loose access to your private key due to compromise, seizure, forgotten passphrase, or media failure.</p>
+<p>If you revocation certificate is compromised, the individual who compromises your revocation certificate will be able to circulate the certificate thereby disabling your key. However, the individual will not be able to compromise your secret key through his access to your revocation certificate. Therefore, they will not be able to generate fake signatures, decrypt messages encrypted with your keypair, or otherwise misrepresent themselves as the owner of your keypair.</p>
+<p>The GnuPG command to generate an ascii encoded revocation certification is:</p>
+<pre>gpg --output revcert.asc --gen-revoke <key_id><&#47;pre><br />
+[Thanks to cryptnet.net for providing the documentation all that comes from!]</p>
+<h2>After the party<&#47;h2><br />
+You can sign the keys manually using GPG (See <a href="http:&#47;&#47;cryptnet.net&#47;fdp&#47;crypto&#47;keysigning_party&#47;en&#47;keysigning_party.html#after_keysigning_party">http:&#47;&#47;cryptnet.net&#47;fdp&#47;crypto&#47;keysigning_party&#47;en&#47;keysigning_party.html#after_keysigning_party<&#47;a>) or use one of the third party tools to aid in bulk signing keys if you have several to do.</p>
+<p><strong>CAFF<&#47;strong> "caff is a synonym for "CA - fire and forget". It's a Perl script that helps you to automate the whole bunch of manual steps you have to do for every single key you want to sign after a key signing party. caff is part of the package signing-party. caff will mostly used after a keysinging party. "</p>
+<ul>
+<li><a href="https:&#47;&#47;wiki.debian.org&#47;caff">https:&#47;&#47;wiki.debian.org&#47;caff<&#47;a><&#47;li>
+<li><a href="http:&#47;&#47;bloc.eurion.net&#47;archives&#47;2010&#47;gpg-key-signing-with-caff&#47;">http:&#47;&#47;bloc.eurion.net&#47;archives&#47;2010&#47;gpg-key-signing-with-caff&#47;<&#47;a><&#47;li>
+<li><a href="http:&#47;&#47;mruiz.openminds.cl&#47;blog&#47;index.php&#47;2009&#47;12&#47;03&#47;signing-keys-with-caff&#47;">http:&#47;&#47;mruiz.openminds.cl&#47;blog&#47;index.php&#47;2009&#47;12&#47;03&#47;signing-keys-with-caff&#47;<&#47;a><&#47;li><br />
+<&#47;ul><br />
+<strong>PIUS<&#47;strong> pius (PGP Individual UID Signer) helps attendees of PGP keysigning parties. It is the main utility and allows you to quickly and easily sign each UID on a set of PGP keys. It is designed to take the pain out of the sign-all-the-keys part of PGP Keysigning Party while adding security to the process.</p>
+<ul>
+<li><a href="http:&#47;&#47;www.phildev.net&#47;pius&#47;">http:&#47;&#47;www.phildev.net&#47;pius&#47;<&#47;a><&#47;li>
+<li><a href="https:&#47;&#47;www.berrange.com&#47;posts&#47;2012&#47;02&#47;10&#47;gpg-keysigning-made-easy-with-pius&#47;">https:&#47;&#47;www.berrange.com&#47;posts&#47;2012&#47;02&#47;10&#47;gpg-keysigning-made-easy-with-pius&#47;<&#47;a><&#47;li><br />
+<&#47;ul></p>
+<h2>Subverting keysigning<&#47;h2><br />
+Some people will do it to make a point (ala <a href="http:&#47;&#47;madduck.net&#47;blog&#47;2008.01.28:on-the-point-of-keysigning&#47;">http:&#47;&#47;madduck.net&#47;blog&#47;2008.01.28:on-the-point-of-keysigning&#47;<&#47;a>), which has various results including no signatures for them or narky posts (ala <a href="http:&#47;&#47;www.mabula.net&#47;tbfw&#47;=subverting-keysigning">http:&#47;&#47;www.mabula.net&#47;tbfw&#47;=subverting-keysigning<&#47;a>). Basically, don't do it unless you are well enough known that your ID is irrelevant.</p>
+<h2>REMEMBER NO ONE IS OBLIGED TO SIGN ANY KEYS.<&#47;h2><br />
+(Excerpts from http:&#47;&#47;cryptnet.net&#47;fdp&#47;crypto&#47;keysigning_party&#47;en&#47;keysigning_party.html)</p>

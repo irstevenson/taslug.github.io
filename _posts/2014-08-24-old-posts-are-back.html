@@ -1,0 +1,69 @@
+---
+layout: post
+status: publish
+published: true
+title: Old Posts are Back!
+author:
+  display_name: Scott Bragg
+  login: Faulteh
+  email: faulteh@scriptforge.org
+  url: http://www.scriptforge.org/
+author_login: Faulteh
+author_email: faulteh@scriptforge.org
+author_url: http://www.scriptforge.org/
+wordpress_id: 264
+wordpress_url: http://taslug.scriptforge.org/?p=264
+date: '2014-08-24 15:16:58 +1000'
+date_gmt: '2014-08-24 05:16:58 +1000'
+categories:
+- Misc. Announcements
+tags: []
+comments: []
+---
+<p>So I recreated the old website database and looked at importing all of the old website stores as new posts here. As you can see, the history of stories is now back online, albeit the occasional comment has gone missing, mainly because I don't have a lot of time to look into how the old XOOPS way of doing things.</p>
+<p>Wasn't too hard a job, and here was the nifty little script I wrote to dump all the stories into an RSS like feed that Wordpress could easily import. Small hitch came as some posts were text, others were BBcode encoded and others had HTML. These all needed to be reconciled, hence the use of the bbcode and HTMLParser modules.</p>
+<pre>#!&#47;usr&#47;bin&#47;env python</p>
+<p>import MySQLdb as mdb<br />
+from datetime import datetime<br />
+import bbcode<br />
+from HTMLParser import HTMLParser</p>
+<p>class IsHTML(HTMLParser):<br />
+ def __init__(self):<br />
+   HTMLParser.__init__(self)<br />
+   self.is_html = False</p>
+<p> def handle_starttag(self, tag, attrs):<br />
+   self.is_html = True</p>
+<p>if __name__ == "__main__":</p>
+<p> con = mdb.connect('localhost', 'oldtaslug', 'super-secret-password-shhh-dont-tell', 'oldtaslug')<br />
+ c = con.cursor()<br />
+ c.execute("select * from xoops_topics")</p>
+<p> topics = {}<br />
+ rows = c.fetchall()</p>
+<p> for r in rows:<br />
+   topics[r[0]] = r[3]</p>
+<p> c.execute("select * from xoops_stories")<br />
+ stories = []<br />
+ rows = c.fetchall()</p>
+<p> for r in rows:<br />
+   story = {}<br />
+   story['title'] = r[2]<br />
+   story['pubdate'] = datetime.fromtimestamp(r[4]).isoformat()<br />
+   story['story'] = r[9]+r[10]<br />
+   story['category'] = topics[r[12]]<br />
+   stories.append(story)</p>
+<p> for s in stories:<br />
+   print "<item>"<br />
+   print "
+<pubDate>", s['pubdate'], "<&#47;pubDate>"<br />
+   print "<category>", s['category'], "<&#47;category>"<br />
+   print "<title>", s['title'], "<&#47;title>"<br />
+   i = IsHTML()<br />
+   i.feed(s['story'])<br />
+   if (i.is_html):<br />
+     body = s['story'].replace('\n','').replace('\r','')<br />
+   else:<br />
+     body = bbcode.render_html(s['story'])<br />
+   print "<content:encoded>", body, "<&#47;content:encoded>"<br />
+   print "<&#47;item>"</p>
+<p><&#47;pre><br />
+&nbsp;</p>
