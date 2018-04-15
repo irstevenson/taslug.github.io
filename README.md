@@ -4,9 +4,15 @@ This is the Jekyll website source for the Tasmanian Linux User Group (TasLUG).
 
 # Usage
 
-First, ensure you have a version of ruby >= 2.1.0. After which execute:
+The follow details how you can work on the site locally without polluting your local Ruby
+environment (similar to Python virtualenvs). It can do this through the use of
+[RVM](https://rvm.io/) and [Bundler](https://bundler.io/).
 
-    $ sudo gem install jekyll bundler
+First, ensure you have a version of Ruby >= 2.1.0 - if you have RVM installed, then on entering the
+directory it will attempt to set the Ruby version to that specified in `Gemfile`. After which
+execute:
+
+    $ gem install bundler
 
 Next, after cloning the repository go into the working folder and:
 
