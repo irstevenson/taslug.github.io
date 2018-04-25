@@ -7,15 +7,15 @@ categories: launceston
 
 Hi people! For this month's Launceston meeting, we'll be taking a look at
 using the F/OSS diagramming tool Dia to assist with planning, designing and
-refining a game concept.  
-  
-**Where**  
-Upstairs meeting room  
-Royal Oak  
-Crnr Brisbane &amp; Tamar Streets  
-  
-**When**  
-Saturday 29th October  
-2:00pm Start  
-As usual, people are welcome to join for lunch downstairs at 1:00pm  
+refining a game concept.
+
+**Where**
+Upstairs meeting room
+Royal Oak
+Crnr Brisbane & Tamar Streets
+
+**When**
+Saturday 29th October
+2:00pm Start
+As usual, people are welcome to join for lunch downstairs at 1:00pm
 Hope to see you there!

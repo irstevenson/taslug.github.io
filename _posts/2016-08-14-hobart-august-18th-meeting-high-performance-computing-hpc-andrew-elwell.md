@@ -5,17 +5,17 @@ date: 2016-08-14 16:55 +1000
 categories: hobart
 ---
 
-Hello LUGgers!  
-  
+Hello LUGgers!
+
 This month we have Andrew Elwell giving us a talk about High Performance
 Computing. Beat the winter by joining us at Hotel SoHO this Thursday while we
-turn up the megahertz and lower the latency.  
-  
+turn up the megahertz and lower the latency.
+
 Andrew will be talking about High Performance Computing (HPC) and covering
 topics such as clustering, systems management, some basic overview of
 performance, what makes HPC so "special" (and expensive) and how HPC differs
-from High Throughput Computing, Cloud and other fashionable technologies.  
-  
+from High Throughput Computing, Cloud and other fashionable technologies.
+
 
 ## Where
 
