@@ -60,6 +60,11 @@ for item in items:
     else:
         category = ''
 
+    title = title.replace('&amp;', '&')
+    content = content.replace('&amp;', '&')
+    content = content.replace('<br />', '\n')
+    content = '\n'.join([l.rstrip() for l in content.split('\n')])
+
     filename = '{}-{}.md'.format(published.strftime('%Y-%m-%d'),
                                  slugify(title, to_lower=True))
     with open(OUTPUT.format(filename), 'w') as output:
